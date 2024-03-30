@@ -1,0 +1,45 @@
+name: Update Colo to Region Mappings
+
+on:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * *' # 12am every day
+  workflow_dispatch:
+
+jobs:
+  update-colo-mappings:
+    name: Update Colo to Region Mappings
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+
+      - name: Cache Dependencies
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
+        with:
+          path: |
+            ~/.npm
+            node_modules/.cache
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/workflows/format.yml') }}
+          restore-keys: ${{ runner.os }}-npm-
+      
+      - name: Install Dependencies
+        run: npm install
+      
+      - name: Update Mappings
+        run: node scripts/update-colo-regions.js && npm run format
+      
+      - name: Commit Changes
+        id: commitChanges
+        uses: stefanzweifel/git-auto-commit-action@8756aa072ef5b4a080af5dc8fef36c5d586e521d
+        with:
+          commit_message: 'chore: update colo mappings'
+          branch: chore/update-colo-mappings
+        
+      - name: Open and Merge Pull Request
+        if: steps.commitChanges.outputs.changes_detected == 'true'
+        run: |
+          gh pr create --fill
+          gh pr merge --squash --delete-branch --admin
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

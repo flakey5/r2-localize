@@ -1,0 +1,32 @@
+name: Format Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Formatting and Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+
+      - name: Cache Dependencies
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
+        with:
+          path: |
+            ~/.npm
+            node_modules/.cache
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/workflows/format.yml') }}
+          restore-keys: ${{ runner.os }}-npm-
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Prettier
+        run: npm run prettier
+        
+      - name: Run ESLint
+        run: npm run lint

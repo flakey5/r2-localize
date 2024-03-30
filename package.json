@@ -1,0 +1,32 @@
+{
+  "name": "@flakey5/r2-localize",
+  "version": "0.0.1",
+  "description": "Allows for serving files from different R2 buckets based on the request's region.",
+  "main": "src/index.ts",
+  "scripts": {
+    "format": "prettier --check --write \"**/*.{ts,js,json,md}\"",
+    "prettier": "prettier --check \"**/*.{ts,js,json,md}\"",
+    "lint": "eslint ./src",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flakey5/r2-localize.git"
+  },
+  "author": "flakey5",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flakey5/r2-localize/issues"
+  },
+  "homepage": "https://github.com/flakey5/r2-localize#readme",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240320.1",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "@typescript-eslint/parser": "^7.4.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.3"
+  }
+}
