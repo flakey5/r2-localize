@@ -34,7 +34,7 @@ const object: R2Object | null = await localizedBucket.head('some-object', {
 ### Get
 
 ```typescript
-const object: R2Object | null = await localizedBucket.get('some-object', {
+const object: R2Object | R2ObjectBody | null = await localizedBucket.get('some-object', {
   request,
   // R2GetOptions properties here, e.g.
   onlyIf: {
@@ -66,7 +66,7 @@ const object: R2Object | null = await localizedBucket.put(
 Note: this puts the object in the nearest bucket only. The other buckets are unaffected.
 
 ```typescript
-const object: R2Object | null = await localizedBucket.createMultipartUpload(
+const object: R2MultipartUpload = await localizedBucket.createMultipartUpload(
   'some-object',
   {
     request,
@@ -83,7 +83,7 @@ const object: R2Object | null = await localizedBucket.createMultipartUpload(
 Note: this puts the object in the nearest bucket only. The other buckets are unaffected.
 
 ```typescript
-const object: R2Object | null = await localizedBucket.resumeMultipartUpload(
+const object: R2MultipartUpload = await localizedBucket.resumeMultipartUpload(
   'some-object',
   'upload id',
   { request }
@@ -95,7 +95,7 @@ const object: R2Object | null = await localizedBucket.resumeMultipartUpload(
 Note: this deletes the object in the nearest bucket only. The other buckets are unaffected.
 
 ```typescript
-const object: R2Object | null = await localizedBucket.resumeMultipartUpload(
+await localizedBucket.resumeMultipartUpload(
   'some-object',
   'upload id',
   { request }
@@ -105,7 +105,7 @@ const object: R2Object | null = await localizedBucket.resumeMultipartUpload(
 ### List
 
 ```typescript
-const object: R2Object | null = await localizedBucket.list({
+const object: R2Objects = await localizedBucket.list({
   request,
   // R2ListOptions properties here, e.g.
   prefix: 'asd',
@@ -117,7 +117,7 @@ const object: R2Object | null = await localizedBucket.list({
 To access the bucket of a specific region, you can pass in the region's name instead of the request object.
 
 ```typescript
-const object: R2Object | null = await localizedBucket.get('some-object', {
+const object: R2Object | R2ObjectBody | null = await localizedBucket.get('some-object', {
   region: 'wnam',
   // R2GetOptions properties here, e.g.
   onlyIf: {
