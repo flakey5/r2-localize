@@ -1,6 +1,6 @@
 {
   "name": "@flakey5/r2-localize",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "Allows for serving files from different R2 buckets based on the request's region.",
   "main": "src/index.ts",
   "scripts": {
