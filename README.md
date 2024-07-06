@@ -34,13 +34,16 @@ const object: R2Object | null = await localizedBucket.head('some-object', {
 ### Get
 
 ```typescript
-const object: R2Object | R2ObjectBody | null = await localizedBucket.get('some-object', {
-  request,
-  // R2GetOptions properties here, e.g.
-  onlyIf: {
-    // ...
-  },
-});
+const object: R2Object | R2ObjectBody | null = await localizedBucket.get(
+  'some-object',
+  {
+    request,
+    // R2GetOptions properties here, e.g.
+    onlyIf: {
+      // ...
+    },
+  }
+);
 ```
 
 ### Put
@@ -95,11 +98,9 @@ const object: R2MultipartUpload = await localizedBucket.resumeMultipartUpload(
 Note: this deletes the object in the nearest bucket only. The other buckets are unaffected.
 
 ```typescript
-await localizedBucket.resumeMultipartUpload(
-  'some-object',
-  'upload id',
-  { request }
-);
+await localizedBucket.resumeMultipartUpload('some-object', 'upload id', {
+  request,
+});
 ```
 
 ### List
@@ -117,13 +118,16 @@ const object: R2Objects = await localizedBucket.list({
 To access the bucket of a specific region, you can pass in the region's name instead of the request object.
 
 ```typescript
-const object: R2Object | R2ObjectBody | null = await localizedBucket.get('some-object', {
-  region: 'wnam',
-  // R2GetOptions properties here, e.g.
-  onlyIf: {
-    // ...
-  },
-});
+const object: R2Object | R2ObjectBody | null = await localizedBucket.get(
+  'some-object',
+  {
+    region: 'wnam',
+    // R2GetOptions properties here, e.g.
+    onlyIf: {
+      // ...
+    },
+  }
+);
 ```
 
 # License
